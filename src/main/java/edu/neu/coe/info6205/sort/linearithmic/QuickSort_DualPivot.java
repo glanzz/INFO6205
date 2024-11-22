@@ -41,6 +41,12 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
         this(DESCRIPTION, N, config);
     }
 
+    // Get nRuns from the actual caller
+    public QuickSort_DualPivot(int N, int nRuns, Config config) {
+        super(DESCRIPTION, N, nRuns, config);
+        setPartitioner(createPartitioner());
+    }
+
     public Partitioner<X> createPartitioner() {
         return new Partitioner_DualPivot(getHelper());
     }

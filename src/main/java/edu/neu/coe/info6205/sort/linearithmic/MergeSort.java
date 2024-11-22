@@ -73,8 +73,17 @@ public class MergeSort<X extends Comparable<X>> extends SortWithComparableHelper
             return;
         }
 
-        // TO BE IMPLEMENTED  : implement merge sort with insurance and no-copy optimizations
-throw new RuntimeException("implementation missing");
+        int mid = from + (to - from) / 2;
+        sort(noCopy ? aux : a, noCopy ? a : aux, from, mid);
+        sort(noCopy ? aux : a, noCopy ? a : aux, mid, to);
+
+        if (insurance) {
+            if (!helper.less(helper.get(a, mid), helper.get(a, mid - 1)) && noCopy) {
+                return;
+            }
+        }
+
+        merge(noCopy ? aux : a, noCopy ? a : aux, from, mid, to);
     }
 
     // CONSIDER combine with MergeSortBasic, perhaps.

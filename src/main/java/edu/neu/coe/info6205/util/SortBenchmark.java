@@ -163,10 +163,12 @@ public class SortBenchmark {
                 runStringSortBenchmark(words, nWords, nRunsLinearithmic * 3, sorter, timeLoggersLinearithmic);
             }
 
-        if (isConfigBenchmarkStringSorter("quicksortDualPivot") && nRunsLinearithmic > 0)
-            try (SortWithHelper<String> sorter = new QuickSort_DualPivot<>(nWords, config)) {
-                runStringSortBenchmark(words, nWords, nRunsLinearithmic * 4, sorter, timeLoggersLinearithmic);
+        if (isConfigBenchmarkStringSorter("quicksortDualPivot") && nRunsLinearithmic > 0) {
+            int nRuns = nRunsLinearithmic * 4;
+            try (SortWithHelper<String> sorter = new QuickSort_DualPivot<>(nWords, nRuns, config)) {
+                runStringSortBenchmark(words, nWords, nRuns, sorter, timeLoggersLinearithmic);
             }
+        }
 
         if (isConfigBenchmarkStringSorter("quicksort") && nRunsLinearithmic > 0)
             try (SortWithHelper<String> sorter = new QuickSort_Basic<>(nWords, config)) {
@@ -174,9 +176,9 @@ public class SortBenchmark {
             }
 
         if (isConfigBenchmarkStringSorter("heapsort") && nRunsLinearithmic > 0) {
-            Helper<String> helper = HelperFactory.create("Heapsort", nWords, config);
-            try (SortWithHelper<String> sorter = new HeapSort<>(helper)) {
-                runStringSortBenchmark(words, nWords, nRunsLinearithmic * 3, sorter, timeLoggersLinearithmic);
+            int nRuns = nRunsLinearithmic * 3;
+            try (SortWithHelper<String> sorter = new HeapSort<>(nWords, nRuns, config)) {
+                runStringSortBenchmark(words, nWords, nRuns, sorter, timeLoggersLinearithmic);
             }
         }
 
